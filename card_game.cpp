@@ -1,5 +1,6 @@
 #include "cards.h"
 
+#include <array>
 #include <iostream>
 
 void printCard(const Card& card)
@@ -35,4 +36,32 @@ void printCard(const Card& card)
     }
 
     std::cout << rankchar << suitchar;
+}
+
+std::array<Card, 52> createDeck()
+{
+    // Create one standard 52 card deck, that will initially be sorted.
+    std::array<Card, 52> deck {};
+    int max_suits {static_cast<int>(CardSuit::Max_suits)};
+    int max_rank {static_cast<int>(CardRank::Max_ranks)};
+    for (int i {0}; i < max_suits; ++i)
+    {
+        for (int j {0}; j < max_rank; ++j)
+        {
+            Card newCard {static_cast<CardRank>(j), static_cast<CardSuit>(i)};
+            deck[static_cast<std::array<Card, 52>::size_type>(i*max_rank + j)] = newCard;
+        }
+    }
+    return deck;
+}
+
+void printDeck(const std::array<Card, 52>& deck)
+{
+    // Print all the cards in the deck.
+    for (Card card : deck)
+    {
+        printCard(card);
+        std::cout << ' ';
+    }
+    std::cout << '\n';
 }
