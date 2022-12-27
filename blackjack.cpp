@@ -47,5 +47,64 @@ bool promptPlayer()
 
 Outcome playBlackjack(Deck shuffledDeck)
 {
+    // All the steps for for one round of Blackjack
+    int player_score {0};
+    int dealer_score {0};
+    int player_aces {0};
+    int dealer_aces {0};
+    Index draw_index {0};
+
+    // Starting draws
+    std::cout << "Dealer draws the first card: ";
+    printCardHR(shuffledDeck[draw_index]);
+    drawCard(shuffledDeck, draw_index, dealer_score, dealer_aces);
+
+    std::cout << "Player draws their first card: ";
+    printCardHR(shuffledDeck[draw_index]);
+    drawCard(shuffledDeck, draw_index, player_score, player_aces);
+
+    // Player turn
+    bool keep_playing {true};
+    while (keep_playing)
+    {
+        candidateTurn(shuffledDeck, draw_index, player_score, player_aces, true);
+        std::cout << "Your Score: " << player_score << ". Dealer Score: " << dealer_score << ".\n";
+
+        if (player_score == 21)
+        {
+            return Outcome::Win;
+        }
+        else if (player_score > 21)
+        {
+            return Outcome::Loss;
+        }
+        else
+        {
+            keep_playing = promptPlayer();
+        }
+    }
+
+    // Dealer turn
+    std::cout << "Dealer's turn.\n";
+    while (dealer_score < 17)
+    {
+        candidateTurn(shuffledDeck, draw_index, dealer_score, dealer_aces, false);
+        std::cout << "Your Score: " << player_score << ". Dealer Score: " << dealer_score << ".\n";
+    }
+
+    // Final score checking.
+    if (dealer_score > 21)
+    {
+        return Outcome::Win;
+    }
+
+    if (dealer_score > player_score)
+    {
+        return Outcome::Loss;
+    }
+    else if (dealer_score == player_score)
+    {
+        return Outcome::Tie;
+    }
     return Outcome::Win;
 }
