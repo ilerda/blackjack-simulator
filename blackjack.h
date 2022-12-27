@@ -3,6 +3,10 @@
 
 #include "cards.h"
 
-bool playBlackjack(Deck shuffledDeck);
+enum class Outcome {
+    Win, Loss, Tie
+};
+
+Outcome playBlackjack(Deck shuffledDeck);
 
 #endif

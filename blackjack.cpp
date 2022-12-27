@@ -1,7 +1,7 @@
 #include "blackjack.h"
 #include "cards.h"
 
-bool playBlackjack(Deck shuffledDeck)
+Outcome playBlackjack(Deck shuffledDeck)
 {
-    return true;
+    return Outcome::Win;
 }
