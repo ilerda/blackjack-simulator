@@ -21,4 +21,11 @@ struct Card {
 using Deck = std::array<Card, 52>;
 using Index = Deck::size_type;
 
+Deck createDeck();
+void printDeck(const Deck& deck);
+void shuffleDeck(Deck& deck);
+void printCard(const Card& card);
+void printCardHR(const Card& card);
+int getCardValue(const Card& card);
+
 #endif
