@@ -1,5 +1,6 @@
 #include "cards.h"
 
+#include <cassert>
 #include <iostream>
 #include <random>
 
@@ -71,4 +72,30 @@ void shuffleDeck(Deck& deck)
     // Using a reference to the deck, shuffle it with a Mersenne Twister.
     static std::mt19937 mt {static_cast<std::mt19937::result_type>(std::time(nullptr))};
     std::shuffle(deck.begin(), deck.end(), mt);
+}
+
+int getCardValue(const Card& card)
+{
+    // Get the face value of one card.
+    // Aces can have value 11 or 1, whichever is more advantageous to the player.
+    // This is taken care of in the calling function.
+    switch (card.rank)
+    {
+        case CardRank::R2: return 2;
+        case CardRank::R3: return 3;
+        case CardRank::R4: return 4;
+        case CardRank::R5: return 5;
+        case CardRank::R6: return 6;
+        case CardRank::R7: return 7;
+        case CardRank::R8: return 8;
+        case CardRank::R9: return 9;
+        case CardRank::R10: return 10;
+        case CardRank::RJ: return 10;
+        case CardRank::RQ: return 10;
+        case CardRank::RK: return 10;
+        case CardRank::RA: return 11;
+        default:
+            assert(false && "Should never happen");
+            return 0;
+    }
 }
