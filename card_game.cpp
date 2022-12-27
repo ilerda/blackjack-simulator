@@ -3,6 +3,9 @@
 #include <cassert>
 #include <iostream>
 #include <random>
+#include <string>
+
+// This contains the logic for creating and managing a deck of cards.
 
 void printCard(const Card& card)
 {
@@ -37,6 +40,41 @@ void printCard(const Card& card)
     }
 
     std::cout << rankchar << suitchar;
+}
+
+void printCardHR(const Card& card)
+{
+    // Human readable implementation of printCard()
+    std::string suitchar {};
+    std::string rankchar {};
+
+    switch (card.rank)
+    {
+        case CardRank::R2: rankchar = "2"; break;
+        case CardRank::R3: rankchar = "3"; break;
+        case CardRank::R4: rankchar = "4"; break;
+        case CardRank::R5: rankchar = "5"; break;
+        case CardRank::R6: rankchar = "6"; break;
+        case CardRank::R7: rankchar = "7"; break;
+        case CardRank::R8: rankchar = "8"; break;
+        case CardRank::R9: rankchar = "9"; break;
+        case CardRank::R10: rankchar = "10"; break;
+        case CardRank::RJ: rankchar = "Jack"; break;
+        case CardRank::RQ: rankchar = "Queen"; break;
+        case CardRank::RK: rankchar = "King"; break;
+        case CardRank::RA: rankchar = "Ace"; break;
+        default: rankchar = "?"; break;
+    }
+    switch (card.suit)
+    {
+        case CardSuit::Clubs: suitchar = "Clubs"; break;
+        case CardSuit::Diamonds: suitchar = "Diamonds"; break;
+        case CardSuit::Hearts: suitchar = "Hearts"; break;
+        case CardSuit::Spades: suitchar = "Spades"; break;
+        default: suitchar = "?"; break;
+    }
+
+    std::cout << rankchar << " of " << suitchar << '\n';
 }
 
 Deck createDeck()
