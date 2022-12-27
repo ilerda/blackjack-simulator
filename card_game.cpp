@@ -1,6 +1,7 @@
 #include "cards.h"
 
 #include <iostream>
+#include <random>
 
 void printCard(const Card& card)
 {
@@ -63,4 +64,11 @@ void printDeck(const Deck& deck)
         std::cout << ' ';
     }
     std::cout << '\n';
+}
+
+void shuffleDeck(Deck& deck)
+{
+    // Using a reference to the deck, shuffle it with a Mersenne Twister.
+    static std::mt19937 mt {static_cast<std::mt19937::result_type>(std::time(nullptr))};
+    std::shuffle(deck.begin(), deck.end(), mt);
 }
