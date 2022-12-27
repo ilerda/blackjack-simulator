@@ -3,4 +3,6 @@
 
 #include "cards.h"
 
+bool playBlackjack(Deck shuffledDeck);
+
 #endif
